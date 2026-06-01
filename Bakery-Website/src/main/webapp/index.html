@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maison Levain — Artisan Bakery</title>
+<meta name="description" content="Handcrafted sourdough, flaky croissants, and seasonal cakes baked fresh every morning." />
+<meta property="og:title" content="Maison Levain — Artisan Bakery" />
+<meta property="og:description" content="Handcrafted sourdough, flaky croissants, and seasonal cakes baked fresh every morning." />
+<meta property="og:image" content="assets/bakery-hero.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #faf6ef;
+    --fg: #3a2e22;
+    --muted: #7a6b58;
+    --card: #fdf9f2;
+    --border: #e8ddc9;
+    --primary: #8a4a26;
+    --accent: #d49a3f;
+    --secondary: #f0e6d2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  header {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+    padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
+    display: flex; align-items: center; justify-content: space-between;
+    color: #fff;
+  }
+  header .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; letter-spacing: 0.02em; }
+  header nav { display: none; gap: 2rem; font-size: 0.9rem; }
+  header nav a:hover { color: var(--accent); }
+  @media (min-width: 768px) { header nav { display: flex; } }
+  .btn {
+    display: inline-block; padding: 0.7rem 1.5rem; border-radius: 999px;
+    font-size: 0.9rem; font-weight: 500; transition: all .2s; cursor: pointer; border: 0;
+  }
+  .btn-primary { background: var(--accent); color: #2b1d10; }
+  .btn-primary:hover { background: #c08a32; }
+  .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.5); color: #fff; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+  .hero {
+    position: relative; height: 100svh; min-height: 600px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 0 1.5rem;
+  }
+  .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(40,30,20,0.55), rgba(40,30,20,0.2) 40%, rgba(40,30,20,0.75));
+  }
+  .hero .content { position: relative; z-index: 2; color: #fff; max-width: 56rem; }
+  .eyebrow { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(2.25rem, 8vw, 5.5rem); line-height: 1.05; word-wrap: break-word; }
+  .hero p { margin: 1.5rem auto 0; max-width: 36rem; font-size: 1.05rem; opacity: 0.95; }
+  .cta-row { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+
+  section { padding: 6rem clamp(1.25rem, 4vw, 3rem); }
+  .container { max-width: 80rem; margin: 0 auto; }
+  .container-sm { max-width: 48rem; margin: 0 auto; text-align: center; }
+  .container-md { max-width: 64rem; margin: 0 auto; }
+  .section-head { text-align: center; margin-bottom: 4rem; }
+  .section-head .eyebrow { color: var(--primary); }
+  .section-head h2 { font-size: clamp(2rem, 5vw, 3rem); }
+
+  .grid { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
+    overflow: hidden; transition: transform .3s, box-shadow .3s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(60,40,20,0.25); }
+  .card .img-wrap { aspect-ratio: 1/1; overflow: hidden; }
+  .card img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+  .card:hover img { transform: scale(1.05); }
+  .card-body { padding: 1.5rem; }
+  .card-body .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; }
+  .price { color: var(--primary); font-weight: 600; }
+  .card p { margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted); }
+
+  .story { background: var(--secondary); }
+  .story p { font-size: 1.15rem; line-height: 1.7; color: #4a3c2c; margin-top: 1.5rem; }
+  .story h2 { margin-top: 0.75rem; }
+
+  .visit-grid { display: grid; gap: 3rem; grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 768px) { .visit-grid { grid-template-columns: 1fr 1fr; } }
+  .visit dl { margin-top: 1.5rem; font-size: 0.95rem; }
+  .visit dl > div { display: flex; gap: 1rem; padding: 0.4rem 0; }
+  .visit dt { width: 6rem; color: var(--primary); font-weight: 500; }
+  .visit h2 { text-align: left; }
+  .visit .eyebrow { text-align: left; }
+  .visit p.lead { color: var(--muted); margin-top: 1rem; }
+  .visit .photo { border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); }
+  .visit .photo img { width: 100%; height: 20rem; object-fit: cover; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem; text-align: center; font-size: 0.85rem; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Maison Levain</div>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#story">Our Story</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <a href="#visit" class="btn btn-primary">Order</a>
+</header>
+
+<section class="hero">
+  <img class="bg" src="assets/bakery-hero.jpg" alt="Freshly baked sourdough and croissants on a wooden table" />
+  <div class="overlay"></div>
+  <div class="content">
+    <p class="eyebrow">Since 2014</p>
+    <h1 class="serif">Bread, baked with patience.</h1>
+    <p>Slow-fermented sourdough, laminated pastries, and seasonal cakes — made by hand each morning in our neighborhood bakery.</p>
+    <div class="cta-row">
+      <a href="#menu" class="btn btn-primary">See the menu</a>
+      <a href="#visit" class="btn btn-ghost">Find us</a>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">From the oven</p>
+      <h2 class="serif">Today's bake</h2>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <div class="img-wrap"><img src="assets/bakery-sourdough.jpg" alt="Country Sourdough" loading="lazy" /></div>
+        <div class="card-body">
+          <div class="row"><h3>Country Sourdough</h3><span class="price">$8</span></div>
+          <p>48-hour cold ferment, crackling crust.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="img-wrap"><img src="assets/bakery-croissant.jpg" alt="Butter Croissant" loading="lazy" /></div>
+        <div class="card-body">
+          <div class="row"><h3>Butter Croissant</h3><span class="price">$4.50</span></div>
+          <p>72 layers of French cultured butter.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="img-wrap"><img src="assets/bakery-cake.jpg" alt="Seasonal Berry Cake" loading="lazy" /></div>
+        <div class="card-body">
+          <div class="row"><h3>Seasonal Berry Cake</h3><span class="price">$42</span></div>
+          <p>Vanilla sponge, mascarpone, fresh berries.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="story">
+  <div class="container-sm">
+    <p class="eyebrow">Our story</p>
+    <h2 class="serif">Flour, water, salt, time.</h2>
+    <p>We started Maison Levain with a single sourdough starter and a tiny stone oven. A decade later, we still mill our own flour, ferment for 48 hours, and shape every loaf by hand. No shortcuts — just bread the way it's meant to be.</p>
+  </div>
+</section>
+
+<section id="visit" class="visit">
+  <div class="container-md">
+    <div class="visit-grid">
+      <div>
+        <p class="eyebrow">Visit us</p>
+        <h2 class="serif">Come say hello.</h2>
+        <p class="lead">We open early and bake until we sell out. Stop in for a warm croissant and a flat white.</p>
+        <dl>
+          <div><dt>Address</dt><dd>128 Mill Street, Brooklyn NY</dd></div>
+          <div><dt>Hours</dt><dd>Tue–Sun · 7am — 4pm</dd></div>
+          <div><dt>Phone</dt><dd>(718) 555-0142</dd></div>
+        </dl>
+      </div>
+      <div class="photo"><img src="assets/bakery-croissant.jpg" alt="Golden croissant" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="y"></span> Maison Levain · Baked fresh in Brooklyn
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
